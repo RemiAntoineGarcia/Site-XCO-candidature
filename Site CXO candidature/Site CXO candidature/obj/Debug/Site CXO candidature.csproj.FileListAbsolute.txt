@@ -1,0 +1,10 @@
+C:\Users\remig\Desktop\projet alternance\site projet\Site-XCO-candidature\Site CXO candidature\Site CXO candidature\bin\Debug\Site CXO candidature.exe.config
+C:\Users\remig\Desktop\projet alternance\site projet\Site-XCO-candidature\Site CXO candidature\Site CXO candidature\bin\Debug\Site CXO candidature.exe
+C:\Users\remig\Desktop\projet alternance\site projet\Site-XCO-candidature\Site CXO candidature\Site CXO candidature\bin\Debug\Site CXO candidature.pdb
+C:\Users\remig\Desktop\projet alternance\site projet\Site-XCO-candidature\Site CXO candidature\Site CXO candidature\obj\Debug\Site CXO candidature.csproj.AssemblyReference.cache
+C:\Users\remig\Desktop\projet alternance\site projet\Site-XCO-candidature\Site CXO candidature\Site CXO candidature\obj\Debug\Site CXO candidature.csproj.SuggestedBindingRedirects.cache
+C:\Users\remig\Desktop\projet alternance\site projet\Site-XCO-candidature\Site CXO candidature\Site CXO candidature\obj\Debug\Site_CXO_candidature.Properties.Resources.resources
+C:\Users\remig\Desktop\projet alternance\site projet\Site-XCO-candidature\Site CXO candidature\Site CXO candidature\obj\Debug\Site CXO candidature.csproj.GenerateResource.cache
+C:\Users\remig\Desktop\projet alternance\site projet\Site-XCO-candidature\Site CXO candidature\Site CXO candidature\obj\Debug\Site CXO candidature.csproj.CoreCompileInputs.cache
+C:\Users\remig\Desktop\projet alternance\site projet\Site-XCO-candidature\Site CXO candidature\Site CXO candidature\obj\Debug\Site CXO candidature.exe
+C:\Users\remig\Desktop\projet alternance\site projet\Site-XCO-candidature\Site CXO candidature\Site CXO candidature\obj\Debug\Site CXO candidature.pdb
