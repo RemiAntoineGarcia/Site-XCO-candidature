@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackEndservice.cs" />
-    <Compile Include="DataGestion.cs" />
     <Compile Include="IInventory.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="IOrderLine.cs" />

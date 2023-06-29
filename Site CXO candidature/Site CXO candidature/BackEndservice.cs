@@ -10,31 +10,55 @@ namespace Site_CXO_candidature
     internal class BackEndservice : IBackEndService
     {
         //Variable
-        public List<IReservation> Reservations;
-        public List<IInventory> Inventorys;
+        public List<IReservation> Reservations; //list of all Reservations
+        public List<IInventory> Inventorys; //list of all Inventory
 
         public int LastReservationID;
-
+        //limit fixer arbitrairement
         int defaultLimitReservation = 10;
         int defaultLimitInventory = 30;
         // constructor
-        public BackEndservice() 
+        public BackEndservice()
         {
-            Reservations = GetReservations(0, defaultLimitReservation);
-            Inventorys = GetInventory(0, defaultLimitInventory);
+            Reservations = new List<IReservation>();
+            Inventorys = new List<IInventory>();
+
+            //add data to the list
+            //supose to fech in the data base
+            
         }
 
 
 
         ///interface's function
-        ///public fonction
+        ///public fonction (front or external used)
 
         //create a reservation
-        public IReservation CreateReservation(List<IOrderLine> order) 
+        public IReservation CreateReservation(List<IOrderLine> order)  
         {
+            //fuze double
+            List<IOrderLine> orderChecked = new List<IOrderLine>();
+            foreach (IOrderLine orderLine in order)
+            {
+                if (Inventorys.FindIndex(x => x.ProductId == orderLine.ProductId) != -1) //check if the productId exist in the Inventory
+                {
+
+                    IOrderLine newOrderLine = new OrderLine(orderLine.ProductId, 0);
+                    foreach (IOrderLine orderLine2 in order.FindAll(x => x.ProductId == orderLine.ProductId))
+                    {
+                        newOrderLine.Quantity += orderLine2.Quantity;
+                    }
+                    orderChecked.Add(newOrderLine);
+                }
+                else
+                {
+                    return null;// cancel the reservation if th productId don't exist (we can also juste delete this part to create the reservation without the problemetic element)
+                }
+            }
+
             string id = generatReservationID();
-            bool isAvailable = checkOrder(order);
-            Reservation reservation = new Reservation(id, order, isAvailable);
+            bool isAvailable = reserveOrder(orderChecked);
+            Reservation reservation = new Reservation(id, orderChecked, isAvailable);
 
             //send to the database
 
@@ -44,28 +68,39 @@ namespace Site_CXO_candidature
         //get a part of the réservation's List
         public List<IReservation> GetReservations(int cursor, int limit) 
         {
-            //List<IReservation> reservations
-            //verifie if the cursor and cursor +limit is out of the List
-
-
             //get the list
-
+            List<IReservation> partReservations = Reservations.GetRange(cursor, limit);
 
             //return the list
-            return null;
+            return partReservations;
         }
-        public void setInventory(string productId, int limit)
+        //
+        public void setInventory(string productId, int quantity)
         {
-            
+            int indexToModify = Inventorys.FindIndex(x => x.ProductId == productId);
+            Inventorys[indexToModify].Quantity = quantity; 
         }
+        
         public List<IInventory> GetInventory(int cursor, int limit)
         {
-            return null;
+            //get the list
+            List<IInventory> partInventory = Inventorys.GetRange(cursor, limit);
+
+            //return the list
+            return partInventory;
         }
-        //get the réservation from the database(html in this case)
+        
+        //Call whenever the Inventoty is update
+        public void onUpdateInventory()
+        {
+            //check if the reservation that are not available can be put available
+            foreach (IReservation reservation in Reservations.FindAll(x => x.IsAvailable == false))//possible obtimisation : find only the reservation that contain the change product
+            {
+                Reservations.Find(x => x.ReservationId == reservation.ReservationId).IsAvailable = reserveOrder(reservation.OrdersLines);
+            }
+        }
 
-
-        //private fonction
+        //private fonction(internal used
         //generate a unique ID
         private string generatReservationID()
         {
@@ -114,12 +149,28 @@ namespace Site_CXO_candidature
                     }
                 }
                 else
-                { 
-                    Console.WriteLine("Error CheckOrder: invalid order");
+                {
+                    //since it's cheched in CreateReservation before it's not supposed to append
+                    Console.WriteLine("Error CheckOrder: invalid order, inexisting productId");
                     return false; 
                 }
             }
             return true;
+        }
+        // check the order and
+        private bool reserveOrder(List<IOrderLine> order)
+        {
+            if (checkOrder(order))
+            {
+                foreach (OrderLine orderLine in order)
+                {
+                    int index = Inventorys.FindIndex(x => x.ProductId == orderLine.ProductId);
+                    Inventorys[index].ReservedQuantity += orderLine.Quantity;
+                }
+                return true;
+            }
+            else 
+            { return false; }
         }
     }
 }

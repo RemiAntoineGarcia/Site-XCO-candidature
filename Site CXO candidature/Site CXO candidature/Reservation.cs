@@ -15,7 +15,7 @@ namespace Site_CXO_candidature
         public string ReservationId { get; } //id unique
         public DateTime CreateAt { get; }
         public List<IOrderLine> OrdersLines { get; }
-        public bool IsAvailable { get; } // true = disponible /false = en attente?
+        public bool IsAvailable { get; set; } // true = disponible /false = en attente?
 
         //constructor
         public Reservation(string id, List<IOrderLine> order,bool isAvailable)

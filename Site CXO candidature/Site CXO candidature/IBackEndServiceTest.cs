@@ -12,7 +12,7 @@ namespace Site_CXO_candidature
 
         //get the réservation's List from the database(html in this case)
         List<IReservation> GetReservations(int cursor, int limit);
-        void setInventory(string productId, int limit);
+        void setInventory(string productId, int quantity);
 
         List<IInventory> GetInventory(int cursor, int limit);
         

@@ -14,5 +14,12 @@ namespace Site_CXO_candidature
         public string ProductId { get; }
         public int Quantity { get; set; }
         public int ReservedQuantity { get; set; }
+
+        public Inventory(string productId, int quantity)
+        {
+            ProductId = productId;
+            Quantity = quantity;
+            ReservedQuantity =0;
+        }
     }
 }
