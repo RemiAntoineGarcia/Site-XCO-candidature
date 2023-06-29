@@ -9,10 +9,10 @@ namespace Site_CXO_candidature
     /// <summary>
     /// state of the product's Stock
     /// </summary>
-    internal class Inventory
+    internal class Inventory : IInventory
     {
-        string ProductId { get; }
-        int Quantity { get; set; }
-        int ReservedQuantity { get; set; }
+        public string ProductId { get; }
+        public int Quantity { get; set; }
+        public int ReservedQuantity { get; set; }
     }
 }

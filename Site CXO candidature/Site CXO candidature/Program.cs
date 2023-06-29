@@ -14,12 +14,35 @@ namespace Site_CXO_candidature
         [STAThread]
         static void Main()
         {
-            Console.WriteLine("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT!");
+            Console.WriteLine("launch test!");
+            if (test1()) 
+            { 
+                Console.WriteLine("test1   :  OK");
+                
+            }
+            else { Console.WriteLine("test1   :  ERREUR"); }
+
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
             
 
+        }
+
+        //Teste à effectuer
+        static Boolean test1() 
+        {
+            OrderLine ordertest = new OrderLine("Idtest1", 1);
+            List<IOrderLine> orders = new List<IOrderLine>();
+            orders.Add(ordertest);
+            Reservation reservation = new Reservation("IDres1", orders, true);
+            Console.WriteLine("test1  :");
+            Console.WriteLine("ProductId = " + ordertest.ProductId + "  :  Quantity = " + ordertest.Quantity );
+
+            Console.WriteLine("ID = " + reservation.ReservationId + "_ time =" + reservation.CreateAt.ToString() + "_ IsAvailible =" + reservation.IsAvailable.ToString());
+            return true;
         }
     }
 }

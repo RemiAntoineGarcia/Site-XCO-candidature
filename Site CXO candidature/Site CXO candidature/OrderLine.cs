@@ -6,9 +6,18 @@ using System.Threading.Tasks;
 
 namespace Site_CXO_candidature
 {
-    internal class OrderLine
+    internal class OrderLine : IOrderLine
     {
-        string ProductId { get; }
-        int Quantity { get; set; }
+        //variable
+        public string ProductId { get;}
+        public int Quantity { get; set; }
+
+        //Constructor
+        public OrderLine(string id, int quantity) 
+        { 
+            ProductId = id;
+            Quantity = quantity;
+        }
+        //Functions
     }
 }
